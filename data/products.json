@@ -1,0 +1,164 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "image": "images/product-item1.png",
+      "title": "The Midnight Garden",
+      "author": "Lauren Asher",
+      "rating": 5,
+      "price": "$870"
+    },
+    {
+      "id": 2,
+      "image": "images/product-item2.png",
+      "title": "Secrets of the Alchemist",
+      "author": "Lauren Asher",
+      "rating": 4,
+      "price": "$870"
+    },
+    {
+      "id": 3,
+      "image": "images/product-item3.png",
+      "title": "Heavenly Bodies",
+      "author": "Lauren Asher",
+      "rating": 5,
+      "price": "$870"
+    },
+    {
+      "id": 4,
+      "image": "images/product-item4.png",
+      "title": "Echoes of the Past",
+      "author": "Lauren Asher",
+      "rating": 5,
+      "price": "$870"
+    },
+    {
+      "id": 5,
+      "image": "images/product-item5.png",
+      "title": "The Crystal Key",
+      "author": "Lauren Asher",
+      "rating": 5,
+      "price": "$870"
+    },
+    {
+      "id": 6,
+      "image": "images/product-item6.png",
+      "title": "The Story of Success",
+      "author": "Lauren Asher",
+      "rating": 5,
+      "price": "$870"
+    },
+    {
+      "id": 7,
+      "image": "images/product-item7.png",
+      "title": "Shadow of the Serpent",
+      "author": "Lauren Asher",
+      "rating": 4,
+      "price": "$750"
+    },
+    {
+      "id": 8,
+      "image": "images/product-item8.png",
+      "title": "Starlight Sonata",
+      "author": "Lauren Asher",
+      "rating": 5,
+      "price": "$870"
+    },
+    {
+      "id": 9,
+      "image": "images/product-item9.png",
+      "title": "Beyond the Horizon",
+      "author": "Lauren Asher",
+      "rating": 5,
+      "price": "$640"
+    },
+    {
+      "id": 10,
+      "image": "images/product-item10.png",
+      "title": "The Silent Witness",
+      "author": "Lauren Asher",
+      "rating": 5,
+      "price": "$999"
+    },
+    {
+      "id": 11,
+      "image": "images/product-item11.png",
+      "title": "Dreams of Avalon",
+      "author": "Lauren Asher",
+      "rating": 5,
+      "price": "$410"
+    },
+    {
+      "id": 12,
+      "image": "images/product-item12.png",
+      "title": "Legends of the Dragon Isles",
+      "author": "Lauren Asher",
+      "rating": 5,
+      "price": "$870"
+    },
+    {
+      "id": 13,
+      "image": "images/product-item1.png",
+      "title": "Mystery of the Old Oak",
+      "author": "John Doe",
+      "rating": 4,
+      "price": "$550"
+    },
+    {
+      "id": 14,
+      "image": "images/product-item2.png",
+      "title": "The Last Voyage",
+      "author": "Jane Smith",
+      "rating": 5,
+      "price": "$920"
+    },
+    {
+      "id": 15,
+      "image": "images/product-item3.png",
+      "title": "Whispers in the Wind",
+      "author": "Emily White",
+      "rating": 4,
+      "price": "$480"
+    },
+    {
+      "id": 16,
+      "image": "images/product-item4.png",
+      "title": "The Forgotten Realm",
+      "author": "Michael Brown",
+      "rating": 3,
+      "price": "$320"
+    },
+    {
+      "id": 17,
+      "image": "images/product-item5.png",
+      "title": "City of Gold",
+      "author": "David Wilson",
+      "rating": 5,
+      "price": "$1200"
+    },
+    {
+      "id": 18,
+      "image": "images/product-item6.png",
+      "title": "The Alchemist's Daughter",
+      "author": "Sarah Johnson",
+      "rating": 4,
+      "price": "$670"
+    },
+    {
+      "id": 19,
+      "image": "images/product-item7.png",
+      "title": "Mountain Peak",
+      "author": "Chris Evans",
+      "rating": 5,
+      "price": "$890"
+    },
+    {
+      "id": 20,
+      "image": "images/product-item8.png",
+      "title": "Ocean Breeze",
+      "author": "Anna Taylor",
+      "rating": 4,
+      "price": "$450"
+    }
+  ]
+}
