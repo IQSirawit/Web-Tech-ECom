@@ -382,7 +382,7 @@
                     <div class="dropdown-menu animate slide dropdown-menu-start dropdown-menu-lg-end p-3">
                       <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-primary">Your wishlist</span>
-                        <span class="badge bg-primary rounded-pill">2</span>
+                        <span class="badge bg-primary rounded-pill" id="wishlist-badge">0</span>
                       </h4>
                       <ul class="list-group mb-3">
                         <li class="list-group-item bg-transparent d-flex justify-content-between lh-sm">
@@ -426,31 +426,13 @@
                     <div class="dropdown-menu animate slide dropdown-menu-start dropdown-menu-lg-end p-3">
                       <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-primary">Your cart</span>
-                        <span class="badge bg-primary rounded-pill">2</span>
+                        <span class="badge bg-primary rounded-pill" id="cart-badge">0</span>
                       </h4>
-                      <ul class="list-group mb-3">
-                        <li class="list-group-item bg-transparent d-flex justify-content-between lh-sm">
-                          <div>
-                            <h5>
-                              <a href="single-product.html">Secrets of the Alchemist</a>
-                            </h5>
-                            <small>High quality in good price.</small>
-                          </div>
-                          <span class="text-primary">$870</span>
-                        </li>
-                        <li class="list-group-item bg-transparent d-flex justify-content-between lh-sm">
-                          <div>
-                            <h5>
-                              <a href="single-product.html">Quest for the Lost City</a>
-                            </h5>
-                            <small>Professional Quest for the Lost City.</small>
-                          </div>
-                          <span class="text-primary">$600</span>
-                        </li>
-                        <li class="list-group-item bg-transparent d-flex justify-content-between">
-                          <span class="text-capitalize"><b>Total (USD)</b></span>
-                          <strong>$1470</strong>
-                        </li>
+                      <ul class="list-group mb-3" id="cart-list-container">
+                        <li class="list-group-item d-flex justify-content-between">
+                          <span>Total (USD)</span>
+                          <strong id="cart-total-price">$0</strong>
+                      </li>
                       </ul>
                       <div class="d-flex flex-wrap justify-content-center">
                         <a href="cart.html" class="w-100 btn btn-dark mb-1" type="submit">View Cart</a>
@@ -1482,5 +1464,6 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="js/script.js"></script>
     <script src="js/loadProducts.js"></script>
+    <script src="js/cart.js"></script>
   </body>
 </html>

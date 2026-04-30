@@ -369,12 +369,13 @@ ${product.price}
 
 <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
 
-<button
-type="button"
-class="btn btn-dark"
-data-bs-toggle="tooltip"
-title="Add to Cart"
->
+<button 
+  type="button" 
+  class="btn btn-dark" 
+  title="Add to Cart"
+  data-id="${product.id}" 
+  data-price="${product.price}"
+  data-title="${product.title}">
 <svg class="cart">
 <use xlink:href="#cart"></use>
 </svg>
