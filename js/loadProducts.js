@@ -35,7 +35,7 @@ Starts the product loading process
 --------------------------------------------------------
 */
 async function requestProducts(
-    url = './data/products.json',
+    url = 'http://localhost:3000/api/products',
     containerId = 'product-grid'
 ){
 

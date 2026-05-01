@@ -1,0 +1,15 @@
+{
+  "name": "bookly-bookstore-free-website-template",
+  "version": "1.0.0",
+  "description": "It is a free HTML CSS template by https://templatesjungle.com/\r You can use this template as a starter template and start building as you require.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
