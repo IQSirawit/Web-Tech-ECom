@@ -37,99 +37,47 @@ Starts the product loading process
 async function requestProducts(
     url = 'http://localhost:3000/api/products',
     containerId = 'product-grid'
-){
+) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-    /*
-    Find container in HTML where products
-    will be inserted dynamically
-    */
-    const container =
-        document.getElementById(containerId);
-
-    if(!container) return;
-
-
-    /*
-    Show temporary loading message
-    while waiting for data
-    */
     container.innerHTML = `
         <div class="col-12 text-center py-5">
-            Loading products...
+            Loading products from Server...
         </div>
     `;
 
-
-    try{
-
-        /*
-        ----------------------------------------
-        AJAX REQUEST USING fetch()
-
-        fetch() sends request to products.json
-        and waits asynchronously for response.
-        The page does not reload.
-        ----------------------------------------
-        */
+    try {
+        // AJAX REQUEST TO YOUR NEW API
         const response = await fetch(url);
 
-
-        /*
-        Check whether request succeeded.
-        If not, throw error.
-        */
-        if(!response.ok){
-            throw new Error(
-                `HTTP Error ${response.status}`
-            );
+        if (!response.ok) {
+            throw new Error(`HTTP Error ${response.status}`);
         }
 
-
         /*
-        response.json()
-
-        Converts JSON text into
-        JavaScript objects/arrays.
-
-        Example:
-
-        JSON:
-        {
-            "products":[...]
-        }
-
-        becomes JS object:
-        data.products
+        Because your productService.js returns 'parsedData.products',
+        'data' here is already the Array of products.
         */
         const data = await response.json();
 
-
-        /*
-        Extract products array from JSON
-        */
-        allProducts = data.products || [];
+        // Check if data is an array directly, or fallback to an empty array
+        allProducts = Array.isArray(data) ? data : (data.products || []);
 
         renderUI(allProducts, container);
         initializeSearch();
 
-
-    }
-    catch(error){
-
-        console.error(error);
-
+    } catch (error) {
+        console.error("Backend connection failed:", error);
         container.innerHTML = `
         <div class="col-12">
             <div class="alert alert-danger text-center">
-                Unable to load products.
+                Unable to connect to Bookly Server. Ensure your backend is running at ${url}.
             </div>
         </div>
         `;
     }
-
 }
-
-
 
 /*
 --------------------------------------------------------
@@ -141,48 +89,48 @@ Builds HTML cards
 Injects cards into page
 --------------------------------------------------------
 */
-function renderUI(products, container){
+function renderUI(products, container) {
 
-/*
-Clear previous content
-*/
-container.innerHTML = '';
+    /*
+    Clear previous content
+    */
+    container.innerHTML = '';
 
 
 
-/*
-If no products matched
-show fallback message
-*/
-if(products.length === 0){
+    /*
+    If no products matched
+    show fallback message
+    */
+    if (products.length === 0) {
 
-container.innerHTML = `
+        container.innerHTML = `
 <div class="col-12 text-center py-5">
     <h4>No Product Match</h4>
     <p>Try another title or category.</p>
 </div>
 `;
 
-return;
+        return;
 
-}
-
-
-
-/*
-Render matched products
-*/
-products.forEach(product=>{
-
-    container.insertAdjacentHTML(
-        'beforeend',
-        createProductCard(product)
-    );
-
-});
+    }
 
 
-initializeTooltips();
+
+    /*
+    Render matched products
+    */
+    products.forEach(product => {
+
+        container.insertAdjacentHTML(
+            'beforeend',
+            createProductCard(product)
+        );
+
+    });
+
+
+    initializeTooltips();
 
 }
 
@@ -197,27 +145,27 @@ Uses trim() and filter()
 
 function filterProducts(searchText = '', category = '') {
 
-const trimmedText = searchText.trim();
+    const trimmedText = searchText.trim();
 
-const filteredProducts = allProducts.filter(product => {
+    const filteredProducts = allProducts.filter(product => {
 
-    const titleMatch =
-        trimmedText === '' ||
-        product.title.trim().includes(trimmedText)
+        const titleMatch =
+            trimmedText === '' ||
+            product.title.trim().includes(trimmedText)
         // Case-sensitive by default
 
-    const categoryMatch =
-        category === '' ||
-        product.category === category;
+        const categoryMatch =
+            category === '' ||
+            product.category === category;
 
-    return titleMatch && categoryMatch;
+        return titleMatch && categoryMatch;
 
-});
+    });
 
-const container =
-document.getElementById('product-grid');
+    const container =
+        document.getElementById('product-grid');
 
-renderUI(filteredProducts, container);
+    renderUI(filteredProducts, container);
 
 }
 
@@ -227,83 +175,83 @@ Search Controls
 ----------------------------------------
 */
 
-function initializeSearch(){
+function initializeSearch() {
 
-const searchInput =
-document.querySelector('#search-form');
+    const searchInput =
+        document.querySelector('#search-form');
 
-const categoryLinks =
-document.querySelectorAll('.cat-list a');
+    const categoryLinks =
+        document.querySelectorAll('.cat-list a');
 
-let activeCategory='';
-
-
-
-/*
-Title Search
-Typing filters live
-*/
-searchInput.addEventListener(
-'input',
-function(){
-
-filterProducts(
-this.value,
-activeCategory
-);
-
-}
-);
+    let activeCategory = '';
 
 
 
-/*
-Press Enter prevents form reload
-*/
-searchInput.closest('form')
-.addEventListener(
-'submit',
-function(e){
+    /*
+    Title Search
+    Typing filters live
+    */
+    searchInput.addEventListener(
+        'input',
+        function () {
 
-e.preventDefault();
+            filterProducts(
+                this.value,
+                activeCategory
+            );
 
-filterProducts(
-searchInput.value,
-activeCategory
-);
-
-}
-);
+        }
+    );
 
 
 
-/*
-Category Search
-Click category to filter
-*/
-categoryLinks.forEach(link=>{
+    /*
+    Press Enter prevents form reload
+    */
+    searchInput.closest('form')
+        .addEventListener(
+            'submit',
+            function (e) {
 
-link.addEventListener(
-'click',
-function(e){
+                e.preventDefault();
 
-e.preventDefault();
+                filterProducts(
+                    searchInput.value,
+                    activeCategory
+                );
 
-activeCategory =
-this.textContent.trim() === 'All'
-? ''
-: this.textContent.trim();
+            }
+        );
 
-filterProducts(
-searchInput.value,
-activeCategory
-);
 
-}
 
-);
+    /*
+    Category Search
+    Click category to filter
+    */
+    categoryLinks.forEach(link => {
 
-});
+        link.addEventListener(
+            'click',
+            function (e) {
+
+                e.preventDefault();
+
+                activeCategory =
+                    this.textContent.trim() === 'All'
+                        ? ''
+                        : this.textContent.trim();
+
+                filterProducts(
+                    searchInput.value,
+                    activeCategory
+                );
+
+            }
+
+        );
+
+    });
 
 }
 
@@ -317,9 +265,9 @@ Creates one product card
 Uses data from each product object
 --------------------------------------------------------
 */
-function createProductCard(product){
+function createProductCard(product) {
 
-return `
+    return `
 <div class="col-lg-3 col-md-4 col-sm-6">
 
 <div class="card position-relative p-4 border rounded-3 h-100">
@@ -408,34 +356,34 @@ rating = 4
 ★★★★☆
 --------------------------------------------------------
 */
-function generateRatingStars(rating){
+function generateRatingStars(rating) {
 
-let stars='';
+    let stars = '';
 
-for(let i=1;i<=5;i++){
+    for (let i = 1; i <= 5; i++) {
 
-    if(i<=rating){
+        if (i <= rating) {
 
-        stars+=`
+            stars += `
         <svg class="star star-fill">
         <use xlink:href="#star-fill"></use>
         </svg>
         `;
 
-    }
-    else{
+        }
+        else {
 
-        stars+=`
+            stars += `
         <svg class="star star-empty">
         <use xlink:href="#star-empty"></use>
         </svg>
         `;
 
+        }
+
     }
 
-}
-
-return stars;
+    return stars;
 
 }
 
@@ -446,21 +394,21 @@ return stars;
 Initialize Bootstrap tooltips
 --------------------------------------------------------
 */
-function initializeTooltips(){
+function initializeTooltips() {
 
-const triggerList =
-[].slice.call(
-document.querySelectorAll(
-'[data-bs-toggle="tooltip"]'
-)
-);
+    const triggerList =
+        [].slice.call(
+            document.querySelectorAll(
+                '[data-bs-toggle="tooltip"]'
+            )
+        );
 
-triggerList.map(
-tooltipTriggerEl =>
-new bootstrap.Tooltip(
-tooltipTriggerEl
-)
-);
+    triggerList.map(
+        tooltipTriggerEl =>
+            new bootstrap.Tooltip(
+                tooltipTriggerEl
+            )
+    );
 
 }
 
@@ -473,10 +421,10 @@ start requesting products
 --------------------------------------------------------
 */
 document.addEventListener(
-'DOMContentLoaded',
-function(){
+    'DOMContentLoaded',
+    function () {
 
-    requestProducts();
+        requestProducts();
 
-}
+    }
 );
