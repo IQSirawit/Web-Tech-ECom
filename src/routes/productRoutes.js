@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
 
-// Define the GET /api/products route
+// This handles GET /api/products and accepts query parameters like /api/products?category=Sci-fi
 router.get('/', productController.getProducts);
 
 module.exports = router;
