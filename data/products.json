@@ -7,7 +7,8 @@
       "author": "Lauren Asher",
       "category": "Romance",
       "rating": 5,
-      "price": "$870"
+      "price": "$870",
+      "quantity": 15
     },
     {
       "id": 2,
@@ -16,7 +17,8 @@
       "author": "Lauren Asher",
       "category": "Sci-fi",
       "rating": 4,
-      "price": "$870"
+      "price": "$870",
+      "quantity": 12
     },
     {
       "id": 3,
@@ -25,7 +27,8 @@
       "author": "Lauren Asher",
       "category": "Sci-fi",
       "rating": 5,
-      "price": "$870"
+      "price": "$870",
+      "quantity": 0
     },
     {
       "id": 4,
@@ -34,7 +37,8 @@
       "author": "Lauren Asher",
       "category": "Fiction",
       "rating": 5,
-      "price": "$870"
+      "price": "$870",
+      "quantity": 8
     },
     {
       "id": 5,
@@ -43,7 +47,8 @@
       "author": "Lauren Asher",
       "category": "Fantasy",
       "rating": 5,
-      "price": "$870"
+      "price": "$870",
+      "quantity": 4
     },
     {
       "id": 6,
@@ -52,7 +57,8 @@
       "author": "Lauren Asher",
       "category": "Lifestyle",
       "rating": 5,
-      "price": "$870"
+      "price": "$870",
+      "quantity": 20
     },
     {
       "id": 7,
@@ -61,7 +67,8 @@
       "author": "Lauren Asher",
       "category": "Thriller",
       "rating": 4,
-      "price": "$750"
+      "price": "$750",
+      "quantity": 0
     },
     {
       "id": 8,
@@ -70,7 +77,8 @@
       "author": "Lauren Asher",
       "category": "Romance",
       "rating": 5,
-      "price": "$870"
+      "price": "$870",
+      "quantity": 6
     },
     {
       "id": 9,
@@ -79,7 +87,8 @@
       "author": "Lauren Asher",
       "category": "Fiction",
       "rating": 5,
-      "price": "$640"
+      "price": "$640",
+      "quantity": 9
     },
     {
       "id": 10,
@@ -88,7 +97,8 @@
       "author": "Lauren Asher",
       "category": "Thriller",
       "rating": 5,
-      "price": "$999"
+      "price": "$999",
+      "quantity": 2
     },
     {
       "id": 11,
@@ -97,7 +107,8 @@
       "author": "Lauren Asher",
       "category": "Fantasy",
       "rating": 5,
-      "price": "$410"
+      "price": "$410",
+      "quantity": 7
     },
     {
       "id": 12,
@@ -106,7 +117,8 @@
       "author": "Lauren Asher",
       "category": "Fantasy",
       "rating": 5,
-      "price": "$870"
+      "price": "$870",
+      "quantity": 0
     },
     {
       "id": 13,
@@ -115,7 +127,8 @@
       "author": "John Doe",
       "category": "Thriller",
       "rating": 4,
-      "price": "$550"
+      "price": "$550",
+      "quantity": 5
     },
     {
       "id": 14,
@@ -124,7 +137,8 @@
       "author": "Jane Smith",
       "category": "Fiction",
       "rating": 5,
-      "price": "$920"
+      "price": "$920",
+      "quantity": 3
     },
     {
       "id": 15,
@@ -133,7 +147,8 @@
       "author": "Emily White",
       "category": "Romance",
       "rating": 4,
-      "price": "$480"
+      "price": "$480",
+      "quantity": 11
     },
     {
       "id": 16,
@@ -142,7 +157,8 @@
       "author": "Michael Brown",
       "category": "Fantasy",
       "rating": 3,
-      "price": "$320"
+      "price": "$320",
+      "quantity": 0
     },
     {
       "id": 17,
@@ -151,7 +167,8 @@
       "author": "David Wilson",
       "category": "Sci-fi",
       "rating": 5,
-      "price": "$1200"
+      "price": "$1200",
+      "quantity": 13
     },
     {
       "id": 18,
@@ -160,7 +177,8 @@
       "author": "Sarah Johnson",
       "category": "Sci-fi",
       "rating": 4,
-      "price": "$670"
+      "price": "$670",
+      "quantity": 10
     },
     {
       "id": 19,
@@ -169,7 +187,8 @@
       "author": "Chris Evans",
       "category": "Health",
       "rating": 5,
-      "price": "$890"
+      "price": "$890",
+      "quantity": 14
     },
     {
       "id": 20,
@@ -178,7 +197,8 @@
       "author": "Anna Taylor",
       "category": "Lifestyle",
       "rating": 4,
-      "price": "$450"
+      "price": "$450",
+      "quantity": 18
     }
   ]
 }

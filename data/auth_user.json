@@ -1,60 +1,70 @@
 {
   "users": [
     {
+      "id": 1,
       "email": "alex.smith@example.com",
       "password_hash": "$2b$10$ZVytfGBVmkOM.3Fub2AbRu85WFwIPnik1D7equcBoggGjzj5T3w/q",
       "first_name": "Alex",
       "registration_date": "2026-01-15"
     },
     {
+      "id": 2,
       "email": "jordan.lee@example.com",
       "password_hash": "$2b$10$hQcvOhyK30KVNEYBMBj1OOp3dcOre.KLIsw4tISzY0np1CGGtx1E.",
       "first_name": "Jordan",
       "registration_date": "2026-01-20"
     },
     {
+      "id": 3,
       "email": "casey.v@example.com",
       "password_hash": "$2b$10$ywfEZgzsCHp.dtV6VHb8quAUrHFXR/BQhz2GIq8sOn7rGPuHS.1Km",
       "first_name": "Casey",
       "registration_date": "2026-02-02"
     },
     {
+      "id": 4,
       "email": "morgan.b@example.com",
       "password_hash": "$2b$10$u0vs1Ra/kNN3ewQhLUIH3ucIJfq7uEJvAoB4rN3ugJtFlxR5duU6u",
       "first_name": "Morgan",
       "registration_date": "2026-02-10"
     },
     {
+      "id": 5,
       "email": "taylor.swift@example.com",
       "password_hash": "$2b$10$EIRpPdzbMB1NoP2ZZPoYyuismi/Z6RPmgPBHgZQdrdLToGhoSReE2",
       "first_name": "Taylor",
       "registration_date": "2026-02-14"
     },
     {
+      "id": 6,
       "email": "sam.rivera@example.com",
       "password_hash": "$2b$10$G.jUw.ogdcf/LUF14BzEve72X885gOyV2CJ9iAUKfJU5cUJrz4dj6",
       "first_name": "Sam",
       "registration_date": "2026-03-01"
     },
     {
+      "id": 7,
       "email": "jamie.fox@example.com",
       "password_hash": "$2b$10$44We0HQA9V2V/qmJ4WRnlel8NnI713TZwO4p1j4F1hUvUBYOSvQgO",
       "first_name": "Jamie",
       "registration_date": "2026-03-05"
     },
     {
+      "id": 8,
       "email": "riley.page@example.com",
       "password_hash": "$2b$10$QHR0enx5xhkj7aKAoe7LeuWTaU8CVpv9n4Y4/93czFbCjzM7WHYX.",
       "first_name": "Riley",
       "registration_date": "2026-03-12"
     },
     {
+      "id": 9,
       "email": "quinn.d@example.com",
       "password_hash": "$2b$10$1QgbhNhJGONjm1KJDjDsDuIAq5acbBfGgh26ecI1NnJw0A7GFp0o2",
       "first_name": "Quinn",
       "registration_date": "2026-03-18"
     },
     {
+      "id": 10,
       "email": "skyler.blue@example.com",
       "password_hash": "$2b$10$Jr.qr.amVLcJ0mqTDWT72u.OD8mGjRvqWtjQWL7v9O3xm/u/FHgAa",
       "first_name": "Skyler",

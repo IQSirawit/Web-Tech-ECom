@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors'); 
 const productRoutes = require('./routes/productRoutes.js');
 const authRoutes = require('./routes/authRoutes'); // Imported here
+const checkoutRoutes = require('./routes/checkoutRoutes');
 
 const app = express();
 const PORT = 3000;
@@ -21,6 +22,9 @@ app.use('/api/auth', authRoutes);
 
 // 2. Use the product routes
 app.use('/api/products', productRoutes);
+
+// 3. Use the checkout routes
+app.use('/api/checkout', checkoutRoutes);
 
 app.get('/', (req, res) => {
     res.send('Welcome to the Bookly API! Go to /api/products to see data.');

@@ -41,11 +41,11 @@ exports.login = async (req, res) => {
 
         /**
          * 5. TOKEN GENERATION
-         * If verified, creates a signed JWT containing user identity.
+         * If verified, creates a signed JWT containing the user ID.
          * This token is what the client will use for future authorized requests.
          */
         const token = jwt.sign(
-            { email: user.email, firstName: user.first_name }, 
+            { userId: user.id }, 
             JWT_SECRET, 
             { expiresIn: '1h' }
         );

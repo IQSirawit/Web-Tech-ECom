@@ -27,6 +27,7 @@ Products appear in webpage
 */
 
 let allProducts = [];
+window.allProducts = allProducts;
 
 /*
 --------------------------------------------------------
@@ -63,6 +64,7 @@ async function requestProducts(
 
         // Check if data is an array directly, or fallback to an empty array
         allProducts = Array.isArray(data) ? data : (data.products || []);
+        window.allProducts = allProducts;
 
         renderUI(allProducts, container);
         initializeSearch();
@@ -266,11 +268,16 @@ Uses data from each product object
 --------------------------------------------------------
 */
 function createProductCard(product) {
+    const quantity = Number(product.quantity || 0);
+    const isOutOfStock = quantity === 0;
+    const stockLabel = isOutOfStock
+        ? `<span class="badge bg-secondary">Out of stock</span>`
+        : `<span class="badge bg-success">In stock: ${quantity}</span>`;
 
     return `
 <div class="col-lg-3 col-md-4 col-sm-6">
 
-<div class="card position-relative p-4 border rounded-3 h-100">
+<div class="card position-relative p-4 border rounded-3 h-100 ${isOutOfStock ? 'opacity-50' : ''}">
 
 ${product.rating >= 5 ? `
 <div class="position-absolute">
@@ -313,7 +320,7 @@ ${generateRatingStars(product.rating)}
 ${product.price}
 </span>
 
-
+${stockLabel}
 
 <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
 
@@ -323,14 +330,15 @@ ${product.price}
   title="Add to Cart"
   data-id="${product.id}" 
   data-price="${product.price}"
-  data-title="${product.title}">
+  data-title="${product.title}"
+  ${isOutOfStock ? 'disabled aria-disabled="true"' : ''}>
 <svg class="cart">
 <use xlink:href="#cart"></use>
 </svg>
 </button>
 
 
-<a href="#" class="btn btn-dark">
+<a href="#" class="btn btn-dark${isOutOfStock ? ' disabled' : ''}">
 <span>
 <svg class="wishlist">
 <use xlink:href="#heart"></use>
@@ -428,3 +436,6 @@ document.addEventListener(
 
     }
 );
+
+// Make allProducts available globally
+window.allProducts = allProducts;

@@ -14,4 +14,13 @@ const getAllProducts = async () => {
     }
 };
 
-module.exports = { getAllProducts };
+const saveProducts = async (products) => {
+    try {
+        const data = { products };
+        await fs.writeFile(dataPath, JSON.stringify(data, null, 2));
+    } catch (error) {
+        throw new Error('Error saving product data');
+    }
+};
+
+module.exports = { getAllProducts, saveProducts };
