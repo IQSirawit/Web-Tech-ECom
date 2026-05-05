@@ -63,7 +63,14 @@ const processCheckout = async (req, res) => {
         const orderPath = path.join(__dirname, '../../data/order.json');
         let orders = [];
         if (fs.existsSync(orderPath)) {
-            orders = JSON.parse(fs.readFileSync(orderPath, 'utf8'));
+            try {
+                const content = fs.readFileSync(orderPath, 'utf8');
+                // Guard against empty file — JSON.parse("") throws SyntaxError
+                orders = content.trim() ? JSON.parse(content) : [];
+            } catch (parseError) {
+                console.warn('order.json was unreadable, starting fresh:', parseError.message);
+                orders = [];
+            }
         }
         orders.push(orderData);
         fs.writeFileSync(orderPath, JSON.stringify(orders, null, 2));

@@ -42,13 +42,16 @@ function updateLoginModalState() {
     const token = localStorage.getItem('token');
     const loginFormContainer = document.getElementById('loginFormContainer');
     const logoutPlaceholder = document.getElementById('logoutPlaceholder');
+    const navTabs = document.getElementById('nav-tab');
 
     if (token) {
         loginFormContainer.classList.add('d-none');
         logoutPlaceholder.classList.remove('d-none');
+        if (navTabs) navTabs.classList.add('d-none');
     } else {
         loginFormContainer.classList.remove('d-none');
         logoutPlaceholder.classList.add('d-none');
+        if (navTabs) navTabs.classList.remove('d-none');
     }
 }
 
@@ -85,11 +88,11 @@ async function loginUser(event) {
 
             updateLoginModalState();
         } else {
-            alert(`Error: ${data.message || 'Unauthorized access'}`);
+            showErrorToast(data.message || 'Invalid email or password.');
         }
     } catch (error) {
         console.error('Login Error:', error);
-        alert('Server is currently unreachable. Please try again later.');
+        showErrorToast('Server is currently unreachable. Please try again later.');
     }
 }
 

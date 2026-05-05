@@ -366,16 +366,26 @@
 
                                 <!-- REGISTER TAB -->
                                 <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
-                                  <form id="registerForm">
+                                  <form id="registerForm" onsubmit="registerUser(event)">
                                     <div class="form-group py-3">
-                                      <label class="mb-2" for="registerEmail">Your email address *</label>
-                                      <input type="email" id="registerEmail" name="username" placeholder="Your Email Address" class="form-control w-100 rounded-3 p-3" required>
+                                      <label class="mb-2" for="registerName">Full Name *</label>
+                                      <input type="text" id="registerName" name="name" placeholder="Your Full Name" class="form-control w-100 rounded-3 p-3" required>
                                     </div>
                                     <div class="form-group pb-3">
-                                      <label class="mb-2" for="registerPassword">Password *</label>
-                                      <input type="password" id="registerPassword" name="password" placeholder="Your Password" class="form-control w-100 rounded-3 p-3" required>
+                                      <label class="mb-2" for="registerEmail">Email Address *</label>
+                                      <input type="email" id="registerEmail" name="email" placeholder="Your Email Address" class="form-control w-100 rounded-3 p-3" required>
                                     </div>
-                                    <label class="py-3">
+                                    <div class="form-group pb-2">
+                                      <label class="mb-2" for="registerPassword">Password *</label>
+                                      <input type="password" id="registerPassword" name="password" placeholder="Your Password" class="form-control w-100 rounded-3 p-3" required oninput="validatePasswordLive(this.value)">
+                                    </div>
+                                    <!-- Live password requirement checklist -->
+                                    <ul id="password-requirements" class="list-unstyled small mb-2 ps-1" style="line-height:1.8">
+                                      <li id="req-length"  class="text-danger">✗ At least 8 characters</li>
+                                      <li id="req-upper"   class="text-danger">✗ At least one uppercase letter</li>
+                                      <li id="req-special" class="text-danger">✗ At least one special character</li>
+                                    </ul>
+                                    <label class="py-2">
                                       <input type="checkbox" required class="d-inline">
                                       <span class="label-body">I agree to the <a href="#" class="fw-bold">Privacy Policy</a></span>
                                     </label>
@@ -1482,6 +1492,7 @@
     <script src="js/script.js"></script>
     <script src="js/loadProducts.js"></script>
     <script src="js/login.js"></script>
+    <script src="js/register.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/checkout.js"></script>
 

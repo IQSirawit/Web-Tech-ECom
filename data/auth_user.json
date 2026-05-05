@@ -69,6 +69,13 @@
       "password_hash": "$2b$10$Jr.qr.amVLcJ0mqTDWT72u.OD8mGjRvqWtjQWL7v9O3xm/u/FHgAa",
       "first_name": "Skyler",
       "registration_date": "2026-03-25"
+    },
+    {
+      "id": 11,
+      "email": "iq.sirawit60@gmail.com",
+      "password_hash": "$2b$10$KwrFNrRZ7ngAUylcwL7c2OpobTrYilsHOtWtQcMDswpipx4d8T0sa",
+      "first_name": "IQSirawit",
+      "registration_date": "2026-05-05"
     }
   ]
 }

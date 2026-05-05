@@ -26,13 +26,17 @@ async function handleCheckout() {
 
     const products = await getAvailableProducts();
     const productMap = {};
+
+    // Ensure the map keys are consistently Numbers
     products.forEach(p => {
-        productMap[String(p.id)] = p;
+        productMap[Number(p.id)] = p;
     });
 
     const stockErrors = [];
     for (const [id, item] of Object.entries(cart.items)) {
-        const product = productMap[String(id)];
+        // Convert the cart item ID to a Number to match the map
+        const product = productMap[Number(id)];
+
         if (!product) {
             stockErrors.push(`Product ${id} does not exist.`);
         } else if (item.quantity > Number(product.quantity || 0)) {
@@ -65,7 +69,15 @@ async function processCheckout() {
         const response = await fetch('http://localhost:3000/api/checkout', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ cart: cart.items, email, card })
+            // Send cart.items as an object (keyed by product ID) so the backend
+            // can use Object.entries(cart) and get real product IDs as keys.
+            // Sending Object.values() turns it into an array whose keys become
+            // "0","1","2" (array indices), causing "Product X does not exist."
+            body: JSON.stringify({
+                cart: cart.items,
+                email: email,
+                card: card
+            })
         });
 
         const data = await response.json();
@@ -116,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const checkoutForm = document.getElementById('checkoutForm');
     if (checkoutForm) {
-        checkoutForm.addEventListener('submit', function(event) {
+        checkoutForm.addEventListener('submit', function (event) {
             event.preventDefault();
             processCheckout();
         });
