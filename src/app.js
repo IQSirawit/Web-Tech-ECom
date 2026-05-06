@@ -3,6 +3,7 @@ const cors = require('cors');
 const productRoutes = require('./routes/productRoutes.js');
 const authRoutes = require('./routes/authRoutes'); // Imported here
 const checkoutRoutes = require('./routes/checkoutRoutes');
+const db = require('./services/db');
 
 const app = express();
 const PORT = 3000;

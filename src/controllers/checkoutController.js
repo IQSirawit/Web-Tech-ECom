@@ -1,6 +1,5 @@
 const productService = require('../services/productService');
-const fs = require('fs');
-const path = require('path');
+const dbService = require('../services/db');
 
 const processCheckout = async (req, res) => {
     try {
@@ -50,32 +49,30 @@ const processCheckout = async (req, res) => {
         }
         await productService.saveProducts(products);
 
-        // Save order
-        const orderData = {
-            id: Date.now(),
-            email,
-            card: card.slice(-4), // Store only last 4 digits
-            items: cart,
-            total: total.toFixed(2),
-            date: new Date().toISOString()
-        };
+        const orderId = `order-${Date.now()}`;
+        const orderTotal = parseFloat(total.toFixed(2));
 
-        const orderPath = path.join(__dirname, '../../data/order.json');
-        let orders = [];
-        if (fs.existsSync(orderPath)) {
-            try {
-                const content = fs.readFileSync(orderPath, 'utf8');
-                // Guard against empty file — JSON.parse("") throws SyntaxError
-                orders = content.trim() ? JSON.parse(content) : [];
-            } catch (parseError) {
-                console.warn('order.json was unreadable, starting fresh:', parseError.message);
-                orders = [];
-            }
+        await dbService.insertOrderHeader({
+            order_id: orderId,
+            user_id: email,
+            total_price: orderTotal
+        });
+
+        for (const [productId, item] of Object.entries(cart)) {
+            const product = productMap[productId];
+            const price = parseFloat(product.price.replace('$', ''));
+            const itemTotal = parseFloat((price * item.quantity).toFixed(2));
+
+            await dbService.insertOrderItem({
+                order_id: orderId,
+                product_id: productId,
+                quantity: item.quantity,
+                item_price: price,
+                total_price: itemTotal
+            });
         }
-        orders.push(orderData);
-        fs.writeFileSync(orderPath, JSON.stringify(orders, null, 2));
 
-        res.status(200).json({ message: 'Checkout successful!' });
+        res.status(200).json({ message: 'Checkout successful!', order_id: orderId });
 
     } catch (error) {
         console.error('Checkout error:', error);
