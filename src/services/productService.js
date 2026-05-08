@@ -1,25 +1,19 @@
-const fs = require('fs').promises;
-const path = require('path');
-
-// Path to your local JSON file
-const dataPath = path.join(__dirname, '../../data/products.json');
+const dbService = require('./db');
 
 const getAllProducts = async () => {
     try {
-        const data = await fs.readFile(dataPath, 'utf8');
-        const parsedData = JSON.parse(data);
-        return parsedData.products; // Returns the products array
+        const products = await dbService.getAllProducts();
+        return products;
     } catch (error) {
-        throw new Error('Error reading product data');
+        throw new Error('Error reading product data from database');
     }
 };
 
 const saveProducts = async (products) => {
     try {
-        const data = { products };
-        await fs.writeFile(dataPath, JSON.stringify(data, null, 2));
+        await dbService.updateProducts(products);
     } catch (error) {
-        throw new Error('Error saving product data');
+        throw new Error('Error saving product data to database');
     }
 };
 
