@@ -10,11 +10,21 @@ if (typeof window !== 'undefined') {
     window.allProducts = allProducts;
 }
 
+function escapeHtml(unsafe) {
+    if (!unsafe || typeof unsafe !== 'string') return unsafe;
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
 /**
  * Main controller function - fetches products from API and renders them
  */
 async function requestProducts(
-    url = 'http://localhost:3000/api/products',
+    url = `${(typeof process !== 'undefined' && process.env && process.env.BASE_URL) || 'http://localhost:3000'}/api/products`,
     containerId = 'product-grid'
 ) {
     const container = document.getElementById(containerId);
@@ -167,21 +177,21 @@ Best Seller
 ` : ''}
 
 <img
-src="${product.image}"
+src="${escapeHtml(product.image)}"
 class="img-fluid shadow-sm"
-alt="${product.title}"
+alt="${escapeHtml(product.title)}"
 >
 
 <h6 class="mt-4 mb-0 fw-bold">
 <a href="single-product.html">
-${product.title}
+${escapeHtml(product.title)}
 </a>
 </h6>
 
 <div class="review-content d-flex">
 
 <p class="my-2 me-2 fs-6 text-black-50">
-${product.author}
+${escapeHtml(product.author)}
 </p>
 
 <div class="rating text-warning d-flex align-items-center">
@@ -191,7 +201,7 @@ ${generateRatingStars(product.rating)}
 </div>
 
 <span class="price text-primary fw-bold mb-2 fs-5">
-${product.price}
+${escapeHtml(product.price)}
 </span>
 
 ${stockLabel}
@@ -203,8 +213,8 @@ ${stockLabel}
   class="btn btn-dark" 
   title="Add to Cart"
   data-id="${product.id}" 
-  data-price="${product.price}"
-  data-title="${product.title}"
+  data-price="${escapeHtml(product.price)}"
+  data-title="${escapeHtml(product.title)}"
   ${isOutOfStock ? 'disabled aria-disabled="true"' : ''}>
 <svg class="cart">
 <use xlink:href="#cart"></use>

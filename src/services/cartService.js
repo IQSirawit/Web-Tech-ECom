@@ -15,6 +15,16 @@ if (typeof window !== 'undefined') {
     window.cart = cart;
 }
 
+function escapeHtml(unsafe) {
+    if (!unsafe || typeof unsafe !== 'string') return unsafe;
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
 function showErrorToast(message) {
     const existingToast = document.getElementById('cartErrorToast');
     if (existingToast) {
@@ -121,7 +131,7 @@ function renderCart() {
             totalHTML += `
             <li class="list-group-item bg-transparent d-flex justify-content-between align-items-start lh-sm">
                 <div class="me-3">
-                <h5 class="mb-1">${item.name}</h5>
+                <h5 class="mb-1">${escapeHtml(item.name)}</h5>
                 <small class="text-dark fw-semibold">Quantity: ${quantity}</small>
                 <div class="mt-2 d-flex gap-2">
                     <button type="button" class="btn btn-xs btn-outline-secondary py-0 px-2" style="font-size: 0.75rem;" data-action="decrement" data-id="${item.id}">-1</button>

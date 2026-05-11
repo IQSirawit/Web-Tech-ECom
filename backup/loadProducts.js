@@ -36,7 +36,7 @@ Starts the product loading process
 --------------------------------------------------------
 */
 async function requestProducts(
-    url = 'http://localhost:3000/api/products',
+    url = `${process.env.BASE_URL || 'http://localhost:3000'}/api/products`,
     containerId = 'product-grid'
 ) {
     const container = document.getElementById(containerId);

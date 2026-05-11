@@ -8,13 +8,17 @@
 function validatePasswordLive(value) {
     const rules = [
         { id: 'req-length',  test: v => v.length >= 8 },
+        { id: 'req-lower',   test: v => /[a-z]/.test(v) },
         { id: 'req-upper',   test: v => /[A-Z]/.test(v) },
+        { id: 'req-number',  test: v => /[0-9]/.test(v) },
         { id: 'req-special', test: v => /[^A-Za-z0-9]/.test(v) }
     ];
 
     const labels = {
         'req-length':  ['✓ At least 8 characters',         '✗ At least 8 characters'],
-        'req-upper':   ['✓ At least one uppercase letter',  '✗ At least one uppercase letter'],
+        'req-lower':   ['✓ At least one lowercase letter', '✗ At least one lowercase letter'],
+        'req-upper':   ['✓ At least one uppercase letter', '✗ At least one uppercase letter'],
+        'req-number':  ['✓ At least one number',           '✗ At least one number'],
         'req-special': ['✓ At least one special character', '✗ At least one special character']
     };
 
@@ -44,8 +48,16 @@ async function registerUser(event) {
         showErrorToast('Password must be at least 8 characters.');
         return;
     }
+    if (!/[a-z]/.test(password)) {
+        showErrorToast('Password must contain at least one lowercase letter.');
+        return;
+    }
     if (!/[A-Z]/.test(password)) {
         showErrorToast('Password must contain at least one uppercase letter.');
+        return;
+    }
+    if (!/[0-9]/.test(password)) {
+        showErrorToast('Password must contain at least one number.');
         return;
     }
     if (!/[^A-Za-z0-9]/.test(password)) {
@@ -55,7 +67,7 @@ async function registerUser(event) {
 
     // Backend API call
     try {
-        const response = await fetch('http://localhost:3000/api/auth/register', {
+        const response = await fetch(`${(typeof process !== 'undefined' && process.env && process.env.BASE_URL) || 'http://localhost:3000'}/api/auth/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, password })
@@ -73,7 +85,13 @@ async function registerUser(event) {
 
             updateLoginModalState();
         } else {
-            showErrorToast(data.message || 'Registration failed. Please try again.');
+            let errorMsg = 'Registration failed. Please try again.';
+            if (data.errors && Array.isArray(data.errors)) {
+                errorMsg = data.errors.map(e => e.msg || e).join('\n');
+            } else if (data.message) {
+                errorMsg = data.message;
+            }
+            showErrorToast(errorMsg);
         }
     } catch (error) {
         console.error('Register Error:', error);

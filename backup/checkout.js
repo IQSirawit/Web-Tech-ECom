@@ -4,7 +4,7 @@ async function getAvailableProducts() {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/api/products');
+        const response = await fetch(`${process.env.BASE_URL || 'http://localhost:3000'}/api/products`);
         if (!response.ok) {
             throw new Error('Unable to fetch products');
         }
@@ -66,7 +66,7 @@ async function processCheckout() {
     const card = document.getElementById('checkoutCard').value.trim();
 
     try {
-        const response = await fetch('http://localhost:3000/api/checkout', {
+        const response = await fetch(`${process.env.BASE_URL || 'http://localhost:3000'}/api/checkout`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             // Send cart.items as an object (keyed by product ID) so the backend

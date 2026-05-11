@@ -10,7 +10,7 @@ async function getAvailableProducts() {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/api/products');
+        const response = await fetch(`${(typeof process !== 'undefined' && process.env && process.env.BASE_URL) || 'http://localhost:3000'}/api/products`);
         if (!response.ok) {
             throw new Error('Unable to fetch products');
         }
@@ -70,13 +70,18 @@ async function processCheckout() {
     const card = document.getElementById('checkoutCard').value.trim();
 
     try {
-        const response = await fetch('http://localhost:3000/api/checkout', {
+        const token = localStorage.getItem('token');
+        const headers = { 'Content-Type': 'application/json' };
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const response = await fetch(`${(typeof process !== 'undefined' && process.env && process.env.BASE_URL) || 'http://localhost:3000'}/api/checkout`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: headers,
             body: JSON.stringify({
                 cart: cart.items,
-                email: email,
-                card: card
+                paymentToken: card // Use paymentToken as expected by backend
             })
         });
 

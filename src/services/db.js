@@ -2,9 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
 
-const DB_FOLDER = path.join(__dirname, '../../data');
-const DB_PATH = path.join(DB_FOLDER, 'store.db');
+const DB_PATH = process.env.DB_PATH || path.join(__dirname, '../../data/store.db');
 
+const DB_FOLDER = path.dirname(DB_PATH);
 if (!fs.existsSync(DB_FOLDER)) {
     fs.mkdirSync(DB_FOLDER, { recursive: true });
 }
@@ -238,6 +238,43 @@ const getAllProducts = () => {
     });
 };
 
+const getAllProductsPaginated = (category, limit, offset) => {
+    return new Promise((resolve, reject) => {
+        let query = 'SELECT * FROM products';
+        let params = [];
+
+        if (category) {
+            query += ' WHERE LOWER(category) = LOWER(?)';
+            params.push(category);
+        }
+
+        query += ' ORDER BY id ASC LIMIT ? OFFSET ?';
+        params.push(limit, offset);
+
+        db.all(query, params, (err, rows) => {
+            if (err) return reject(err);
+            resolve(rows || []);
+        });
+    });
+};
+
+const getProductCount = (category) => {
+    return new Promise((resolve, reject) => {
+        let query = 'SELECT COUNT(*) as count FROM products';
+        let params = [];
+
+        if (category) {
+            query += ' WHERE LOWER(category) = LOWER(?)';
+            params.push(category);
+        }
+
+        db.get(query, params, (err, row) => {
+            if (err) return reject(err);
+            resolve(row.count || 0);
+        });
+    });
+};
+
 const getProductById = (id) => {
     return new Promise((resolve, reject) => {
         db.get('SELECT * FROM products WHERE id = ?', [id], (err, row) => {
@@ -316,6 +353,8 @@ module.exports = {
     insertOrderHeader,
     insertOrderItem,
     getAllProducts,
+    getAllProductsPaginated,
+    getProductCount,
     getProductById,
     updateProduct,
     updateProducts,

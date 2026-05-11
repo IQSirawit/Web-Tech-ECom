@@ -9,6 +9,23 @@ const getAllProducts = async () => {
     }
 };
 
+const getAllProductsPaginated = async (category, page, limit) => {
+    try {
+        const offset = (page - 1) * limit;
+        const products = await dbService.getAllProductsPaginated(category, limit, offset);
+        const totalProducts = await dbService.getProductCount(category);
+        const totalPages = Math.ceil(totalProducts / limit);
+
+        return {
+            products,
+            totalProducts,
+            totalPages
+        };
+    } catch (error) {
+        throw new Error('Error reading paginated product data from database');
+    }
+};
+
 const saveProducts = async (products) => {
     try {
         await dbService.updateProducts(products);
@@ -17,4 +34,4 @@ const saveProducts = async (products) => {
     }
 };
 
-module.exports = { getAllProducts, saveProducts };
+module.exports = { getAllProducts, getAllProductsPaginated, saveProducts };

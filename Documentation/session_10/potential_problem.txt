@@ -1,0 +1,5 @@
+1. What if many people checkout as the same time, can my server handle it?
+2. What if someone try hack into my system, how likely is it for them to success?
+3. Can a user send a 1GB string of input to our database, will that crash my server?
+4. What if the database file is missing or corrupted on the server?
+5. How many way the attacker can attack my current system?
